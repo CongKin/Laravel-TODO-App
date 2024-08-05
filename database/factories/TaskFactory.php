@@ -18,6 +18,7 @@ class TaskFactory extends Factory
     {
         return [
             'task' => fake()->realText(20),
+            'description' => fake()->realText(200),
             'status' => '1',
             'priority' => '1',
             'deadline' => $this->faker->dateTimeBetween('now', '+1 month'),
