@@ -78,6 +78,17 @@ class TaskController extends Controller
         return to_route('task.show', $task)->with('message', 'task was updated');
     }
 
+    public function update_status(Request $request, Task $task)
+    {
+        $data = $request->validate([
+            'status' => ['required', 'in:1,2,3'],
+        ]);
+        
+        $task->update($data);
+
+        return to_route('task.index')->with('message', 'task was updated');
+    }
+
     /**
      * Remove the specified resource from storage.
      */

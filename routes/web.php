@@ -12,3 +12,4 @@ use App\Http\Controllers\TaskController;
 // Route::delete('/task/{id}', [TaskController::class, 'destroy'])->name('task.destroy');
 
 Route::resource('task', TaskController::class);
+Route::get('/task/{task}/pending', [TaskController::class,'to_pending'])->name('task.pending');

@@ -1,6 +1,14 @@
 <x-layout>
     <div>
         <h1>Task {{ $task->created_at->format('Y-m-d')}}</h1>
+        <div class="task-buttons">
+            <a href="{{ route('task.edit', $task) }}" class="task-edit-button">Edit</a>
+            <form action="{{ route('task.destroy', $task) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button class="task-delete-button">Delete</button>
+            </form>
+        </div>
         <div>
             <div>
                 <p><strong>Task:</strong></p>

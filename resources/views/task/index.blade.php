@@ -40,9 +40,9 @@
                         <td class="cell100 column4">{{ $task->deadline ? \Carbon\Carbon::parse($task->deadline)->format('Y-m-d') : 'No deadline' }}</td>
                         <td class="cell100 column5">{{ $task->created_at->format('Y-m-d') }}</td>
                         <td class="cell100 column6">
-                            <form action="{{ route('task.show', $task) }}" method="POST" class="mt-3">
+                            <form action="{{ route('task.update_status', $task) }}" method="POST" class="task">
                                 @csrf
-                                @method('PATCH')
+                                @method('PUT')
                                 @if($task->status == '1')
                                     <button type="submit" name="status" value="2" class="btn btn-primary">Start Task</button>
                                 @elseif($task->status == '2')
@@ -54,7 +54,7 @@
                             </form>
                         </td>
                         <td class="cell100 column7">
-                            <a href="{{ route('task.show', $task) }}" class="task-edit-button">View</a>
+                            <a href="{{ route('task.show', $task) }}" class="task-show-button">View</a>
                             <a href="{{ route('task.edit', $task) }}" class="task-edit-button">Edit</a>
                             <form action="{{ route('task.destroy', $task) }}" method="POST">
                                 @csrf
