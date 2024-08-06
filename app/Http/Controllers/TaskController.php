@@ -12,7 +12,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = Task::query()->orderBy("created_by","desc")->paginate();
+        $tasks = Task::query()->orderBy("created_at","desc")->paginate();
 
         return view("task.index", ["tasks"=> $tasks]);
     }
@@ -30,7 +30,18 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'task' => ['required', 'string', 'max:255'],
+            'description'=> ['nullable', 'string'],
+            'status' => ['required', 'in:1,2,3'],
+            'priority' => ['required', 'in:1,2,3'],
+            'deadline' => ['nullable', 'date'],
+        ]);
+
+        $data['user_id'] = 1;
+        $task = Task::create($data);
+
+        return to_route('task.show', $task)->with('message', 'Note was created');
     }
 
     /**
@@ -38,7 +49,7 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        return 'show';
+        return view("task.show", ["task"=> $task]);
     }
 
     /**

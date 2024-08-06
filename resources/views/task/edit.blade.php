@@ -1,6 +1,6 @@
 <x-layout>
     <div>
-        <h1>Edit Note</h1>
+        <h1>Edit Task</h1>
         <div>
             <div>
                 <label>Task</label>

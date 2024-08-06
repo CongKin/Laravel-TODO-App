@@ -1,6 +1,6 @@
 <x-layout>
     <div class="task-container">
-        <a href="#" class="new-task-btn">
+        <a href="{{ route('task.create')}}" class="new-task-btn">
             New Task
         </a>
         <table class="row100 head">
@@ -45,7 +45,7 @@
                                 @method('PATCH')
                                 @if($task->status == '1')
                                     <button type="submit" name="status" value="2" class="btn btn-primary">Start Task</button>
-                                @elseif($task->status == 'In 2')
+                                @elseif($task->status == '2')
                                     <button type="submit" name="status" value="3" class="btn btn-success">Complete Task</button>
                                     <button type="submit" name="status" value="1" class="btn btn-warning">Set to Pending</button>
                                 @elseif($task->status == '3')

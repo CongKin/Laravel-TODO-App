@@ -10,14 +10,11 @@ class Task extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title',
+        'task',
         'description',
         'status',
         'priority',
         'deadline',
-    ];
-
-    protected $dates = [
-        'deadline', // Ensure this field is treated as a date
+        'user_id',
     ];
 }
