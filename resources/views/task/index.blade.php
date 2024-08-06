@@ -15,14 +15,32 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="row100 body">
-                    <td class="cell100 column1">Task Example</td>
-                    <td class="cell100 column2">Pending</td>
-                    <td class="cell100 column3">Low</td>
-                    <td class="cell100 column4">8 August 2024</td>
-                    <td class="cell100 column5">1 August 2024</td>
-                    <td class="cell100 column6">Function</td>
-                </tr>
+                @foreach ($tasks as $task)
+                    <tr class="row100 body">
+                        <td class="cell100 column1">{{ Str::words($task->task, 30)}}</td>
+                        <td class="cell100 column2">
+                            @if($task->status == '1')
+                                Pending
+                            @elseif($task->status == '2')
+                                In Progress
+                            @else
+                                Completed
+                            @endif
+                        </td>
+                        <td class="cell100 column3">
+                            @if($task->priority == '1')
+                                Low
+                            @elseif($task->priority == '2')
+                                Medium
+                            @else
+                                High
+                            @endif
+                        </td>
+                        <td class="cell100 column4">{{ $task->deadline ? \Carbon\Carbon::parse($task->deadline)->format('Y-m-d') : 'No deadline' }}</td>
+                        <td class="cell100 column5">{{ $task->created_at->format('Y-m-d') }}</td>
+                        <td class="cell100 column6">Function</td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
