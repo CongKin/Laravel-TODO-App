@@ -41,7 +41,7 @@ class TaskController extends Controller
         $data['user_id'] = 1;
         $task = Task::create($data);
 
-        return to_route('task.show', $task)->with('message', 'Note was created');
+        return to_route('task.show', $task)->with('message', 'task was updated');
     }
 
     /**
@@ -57,7 +57,7 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
-        return 'edit';
+        return view("task.edit", ["task"=> $task]);
     }
 
     /**
@@ -65,7 +65,17 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
-        //
+        $data = $request->validate([
+            'task' => ['required', 'string', 'max:255'],
+            'description'=> ['nullable', 'string'],
+            'status' => ['required', 'in:1,2,3'],
+            'priority' => ['required', 'in:1,2,3'],
+            'deadline' => ['nullable', 'date'],
+        ]);
+
+        $task->update($data);
+
+        return to_route('task.show', $task)->with('message', 'task was updated');
     }
 
     /**
@@ -73,6 +83,8 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        //
+        $task->delete();
+
+        return to_route('task.index')->with('message', 'task was deleted');
     }
 }

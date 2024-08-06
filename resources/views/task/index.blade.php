@@ -56,6 +56,11 @@
                         <td class="cell100 column7">
                             <a href="{{ route('task.show', $task) }}" class="task-edit-button">View</a>
                             <a href="{{ route('task.edit', $task) }}" class="task-edit-button">Edit</a>
+                            <form action="{{ route('task.destroy', $task) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button class="task-delete-button">Delete</button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach
