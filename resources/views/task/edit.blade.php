@@ -36,7 +36,7 @@
                     <input type="date" id="due_date" name="due_date" value="{{ old('deadline', $task->deadline ? \Carbon\Carbon::parse($task->deadline)->format('Y-m-d') : '') }}">
                 </div>
                 <div class="task-buttons">
-                    <a href="{{ route('task.index') }}" class="task-cancel-button">Cancel</a>
+                    <a href="{{ route('task.show', $task) }}" class="task-cancel-button">Cancel</a>
                     <button class="task-submit-button">Submit</button>
                 </div>
             </form>

@@ -86,7 +86,7 @@ class TaskController extends Controller
         
         $task->update($data);
 
-        return to_route('task.index')->with('message', 'task was updated');
+        return redirect()->back()->with('message', 'task was updated');
     }
 
     /**
