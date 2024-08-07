@@ -1,6 +1,6 @@
 <x-app-layout>
-    <div>
-        <h1>Edit Task {{ $task->created_at->format('Y-m-d')}}</h1>
+    <div class="task-container">
+        <h1 class="task-header">Edit Task {{ $task->created_at->format('Y-m-d')}}</h1>
         <div>
             <form action="{{ route('task.update', $task) }}" method="POST" class="task">
                 @csrf
@@ -36,8 +36,8 @@
                     <input type="date" id="due_date" name="due_date" value="{{ old('deadline', $task->deadline ? \Carbon\Carbon::parse($task->deadline)->format('Y-m-d') : '') }}">
                 </div>
                 <div class="task-buttons">
-                    <a href="{{ route('task.show', $task) }}" class="task-cancel-button">Cancel</a>
-                    <button class="task-submit-button">Submit</button>
+                    <a href="{{ route('task.show', $task) }}" class="button-3">Cancel</a>
+                    <button class="button-2">Submit</button>
                 </div>
             </form>
         </div>

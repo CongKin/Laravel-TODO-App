@@ -1,6 +1,6 @@
 <x-app-layout>
-    <div>
-        <h1>Create New task</h1>
+    <div class="task-container">
+        <h1 class="task-header">Create New task</h1>
         <div>
             <form action="{{ route('task.store') }}" method="POST" class="task">
                 @csrf
@@ -35,8 +35,8 @@
                     <input type="date" id="deadline" name="deadline">
                 </div>
                 <div class="task-buttons">
-                    <a href="{{ route('task.index') }}" class="task-cancel-button">Cancel</a>
-                    <button class="task-submit-button">Submit</button>
+                    <a href="{{ route('task.index') }}" class="button-3">Cancel</a>
+                    <button class="button-2">Submit</button>
                 </div>
             </form>
         </div>

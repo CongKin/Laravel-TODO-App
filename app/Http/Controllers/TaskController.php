@@ -12,7 +12,10 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = Task::query()->orderBy("created_at","desc")->paginate();
+        $tasks = Task::query()
+            ->where('user_id', request()->user()->id)
+            ->orderBy("created_at","desc")
+            ->paginate();
 
         return view("task.index", ["tasks"=> $tasks]);
     }
@@ -38,10 +41,10 @@ class TaskController extends Controller
             'deadline' => ['nullable', 'date'],
         ]);
 
-        $data['user_id'] = 1;
+        $data['user_id'] = $request->user()->id;;
         $task = Task::create($data);
 
-        return to_route('task.show', $task)->with('message', 'task was updated');
+        return to_route('task.index')->with('message', 'Task was created');
     }
 
     /**
@@ -49,6 +52,10 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
+        if ($task->user_id !== request()->user()->id) {
+            abort(403);
+        }
+
         return view("task.show", ["task"=> $task]);
     }
 
@@ -57,6 +64,10 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
+        if ($task->user_id !== request()->user()->id) {
+            abort(403);
+        }
+
         return view("task.edit", ["task"=> $task]);
     }
 
@@ -65,6 +76,10 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
+        if ($task->user_id !== request()->user()->id) {
+            abort(403);
+        }
+
         $data = $request->validate([
             'task' => ['required', 'string', 'max:255'],
             'description'=> ['nullable', 'string'],
@@ -75,7 +90,7 @@ class TaskController extends Controller
 
         $task->update($data);
 
-        return to_route('task.show', $task)->with('message', 'task was updated');
+        return to_route('task.show', $task)->with('message', 'Task was updated');
     }
 
     public function update_status(Request $request, Task $task)
@@ -86,7 +101,7 @@ class TaskController extends Controller
         
         $task->update($data);
 
-        return redirect()->back()->with('message', 'task was updated');
+        return redirect()->back()->with('message', 'Task was updated');
     }
 
     /**
@@ -96,6 +111,6 @@ class TaskController extends Controller
     {
         $task->delete();
 
-        return to_route('task.index')->with('message', 'task was deleted');
+        return to_route('task.index')->with('message', 'Task was deleted');
     }
 }

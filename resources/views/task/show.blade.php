@@ -1,25 +1,25 @@
 <x-app-layout>
-    <div>
-        <h1>Task {{ $task->created_at->format('Y-m-d')}}</h1>
+    <div class="task-container">
+        <h1 class="task-header">Task {{ $task->created_at->format('Y-m-d')}}</h1>
         <div class="task-buttons">
-            <a href="{{ route('task.index') }}" class="task-cancel-button">Back</a>
+            <a href="{{ route('task.index') }}" class="button-3">Back</a>
             <form action="{{ route('task.update_status', $task) }}" method="POST" class="task">
                 @csrf
                 @method('PUT')
                 @if($task->status == '1')
-                    <button type="submit" name="status" value="2" class="btn btn-primary">Start Task</button>
+                    <button type="submit" name="status" value="2" class="button-61">Start Task</button>
                 @elseif($task->status == '2')
-                    <button type="submit" name="status" value="3" class="btn btn-success">Complete Task</button>
-                    <button type="submit" name="status" value="1" class="btn btn-warning">Set to Pending</button>
+                    <button type="submit" name="status" value="3" class="button-61">Complete Task</button>
+                    <button type="submit" name="status" value="1" class="button-61">Set to Pending</button>
                 @elseif($task->status == '3')
-                    <button type="submit" name="status" value="2" class="btn btn-primary">Reopen Task</button>
+                    <button type="submit" name="status" value="2" class="button-61">Reopen Task</button>
                 @endif
             </form>
-            <a href="{{ route('task.edit', $task) }}" class="task-edit-button">Edit</a>
+            <a href="{{ route('task.edit', $task) }}" class="button-2">Edit</a>
             <form action="{{ route('task.destroy', $task) }}" method="POST">
                 @csrf
                 @method('DELETE')
-                <button class="task-delete-button">Delete</button>
+                <button class="button-3">Delete</button>
             </form>
         </div>
         <div>

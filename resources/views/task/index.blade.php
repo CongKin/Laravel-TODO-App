@@ -1,25 +1,25 @@
 <x-app-layout>
     <div class="task-container">
-        <a href="{{ route('task.create')}}" class="new-task-btn">
+        <a href="{{ route('task.create')}}" class="button-1">
             New Task
         </a>
-        <table class="row100 head">
+        <table>
             <thead>
-                <tr class="row100 head">
-                    <th class="cell100 column1">Task</th>
-                    <th class="cell100 column2">Status</th>
-                    <th class="cell100 column3">Priority</th>
-                    <th class="cell100 column4">Due Date</th>
-                    <th class="cell100 column5">Creation Date</th>
-                    <th class="cell100 column6">Action</th>
-                    <th class="cell100 column7">Operation</th>
+                <tr>
+                    <th>Task</th>
+                    <th>Status</th>
+                    <th>Priority</th>
+                    <th>Due Date</th>
+                    <th>Creation Date</th>
+                    <th>Action</th>
+                    <th>Operation</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($tasks as $task)
-                    <tr class="row100 body">
-                        <td class="cell100 column1">{{ Str::words($task->task, 30)}}</td>
-                        <td class="cell100 column2">
+                    <tr>
+                        <td>{{ Str::words($task->task, 30)}}</td>
+                        <td>
                             @if($task->status == '1')
                                 Pending
                             @elseif($task->status == '2')
@@ -28,7 +28,7 @@
                                 Completed
                             @endif
                         </td>
-                        <td class="cell100 column3">
+                        <td>
                             @if($task->priority == '1')
                                 Low
                             @elseif($task->priority == '2')
@@ -37,29 +37,29 @@
                                 High
                             @endif
                         </td>
-                        <td class="cell100 column4">{{ $task->deadline ? \Carbon\Carbon::parse($task->deadline)->format('Y-m-d') : 'No deadline' }}</td>
-                        <td class="cell100 column5">{{ $task->created_at->format('Y-m-d') }}</td>
-                        <td class="cell100 column6">
+                        <td>{{ $task->deadline ? \Carbon\Carbon::parse($task->deadline)->format('Y-m-d') : 'No deadline' }}</td>
+                        <td>{{ $task->created_at->format('Y-m-d') }}</td>
+                        <td>
                             <form action="{{ route('task.update_status', $task) }}" method="POST" class="task">
                                 @csrf
                                 @method('PUT')
                                 @if($task->status == '1')
-                                    <button type="submit" name="status" value="2" class="btn btn-primary">Start Task</button>
+                                    <button type="submit" name="status" value="2" class="button-61">Start</button>
                                 @elseif($task->status == '2')
-                                    <button type="submit" name="status" value="3" class="btn btn-success">Complete Task</button>
-                                    <button type="submit" name="status" value="1" class="btn btn-warning">Set to Pending</button>
+                                    <button type="submit" name="status" value="3" class="button-61">Complete</button>
+                                    <button type="submit" name="status" value="1" class="button-61">Pending</button>
                                 @elseif($task->status == '3')
-                                    <button type="submit" name="status" value="2" class="btn btn-primary">Reopen Task</button>
+                                    <button type="submit" name="status" value="2" class="button-61">Reset</button>
                                 @endif
                             </form>
                         </td>
-                        <td class="cell100 column7">
-                            <a href="{{ route('task.show', $task) }}" class="task-show-button">View</a>
-                            <a href="{{ route('task.edit', $task) }}" class="task-edit-button">Edit</a>
+                        <td>
+                            <a href="{{ route('task.show', $task) }}" class="button-2">View</a>
+                            <a href="{{ route('task.edit', $task) }}" class="button-2">Edit</a>
                             <form action="{{ route('task.destroy', $task) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button class="task-delete-button">Delete</button>
+                                <button class="button-3">Delete</button>
                             </form>
                         </td>
                     </tr>
