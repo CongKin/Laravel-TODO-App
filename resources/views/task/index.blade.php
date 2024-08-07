@@ -1,4 +1,4 @@
-<x-layout>
+<x-app-layout>
     <div class="task-container">
         <a href="{{ route('task.create')}}" class="new-task-btn">
             New Task
@@ -71,4 +71,4 @@
             {{ $tasks->links() }}
         </div>
     </div>
-</x-layout>
+</x-app-layout>

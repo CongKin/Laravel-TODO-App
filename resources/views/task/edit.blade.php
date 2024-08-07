@@ -1,4 +1,4 @@
-<x-layout>
+<x-app-layout>
     <div>
         <h1>Edit Task {{ $task->created_at->format('Y-m-d')}}</h1>
         <div>
@@ -42,4 +42,4 @@
             </form>
         </div>
     </div>
-</x-layout>
+</x-app-layout>
