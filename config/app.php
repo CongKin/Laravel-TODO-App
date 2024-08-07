@@ -13,7 +13,8 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => 'Todo List',
+    // 'name' => env('APP_NAME', 'Todo List'),
 
     /*
     |--------------------------------------------------------------------------
