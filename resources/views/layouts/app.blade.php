@@ -29,6 +29,7 @@
 
             <!-- Page Content -->
             <main>
+                {{-- Display the success message --}}
                 @session('message')
                     <div class="success-message">
                         {{ session('message') }}

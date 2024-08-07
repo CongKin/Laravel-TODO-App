@@ -24,6 +24,8 @@ Route::middleware(['auth'])->group(function () {
     // Route::delete('/task/{id}', [TaskController::class, 'destroy'])->name('task.destroy');
 
     Route::resource('task', TaskController::class);
+    
+    // route for update status
     Route::put('/task/{task}/update_status', [TaskController::class,'update_status'])->name('task.update_status');
 
 });

@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
+        // generate testing user acc
         User::factory()->create([
             'id' => 1,
             'name' => 'Test User',
@@ -23,6 +24,7 @@ class DatabaseSeeder extends Seeder
             'password'=> bcrypt('qwer@123'),
         ]);
 
+        // generate to do task using factory
         Task::factory(20)->create();
     }
 }

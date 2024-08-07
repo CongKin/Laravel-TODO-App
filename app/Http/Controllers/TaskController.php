@@ -9,6 +9,7 @@ class TaskController extends Controller
 {
     /**
      * Display a listing of the resource.
+     * Display all the to do list of the user
      */
     public function index()
     {
@@ -93,6 +94,7 @@ class TaskController extends Controller
         return to_route('task.show', $task)->with('message', 'Task was updated');
     }
 
+    // update the status of the to do taskw
     public function update_status(Request $request, Task $task)
     {
         $data = $request->validate([
